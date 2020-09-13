@@ -96,12 +96,13 @@ struct Home: View {
             }
             .frame(width: screen.width - 80, height: screen.width - 80)
 
-            
-            // Getting Region Name
-            Text(Locale.current.localizedString(forRegionCode: Locale.current.regionCode!) ?? "")
-                .font(.largeTitle)
-                .fontWeight(.heavy)
-                .padding(.top, 35)
+//            
+//            // Getting Region Name
+//            let locale = Locale.current
+//            Text(locale.regionCode ?? "")
+//                .font(.largeTitle)
+//                .fontWeight(.heavy)
+//                .padding(.top, 35)
             
             Text(getTime())
                 .font(.system(size: 45))

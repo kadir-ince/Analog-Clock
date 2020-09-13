@@ -96,7 +96,7 @@ struct Home: View {
             }
             .frame(width: screen.width - 80, height: screen.width - 80)
 
-//            
+//
 //            // Getting Region Name
 //            let locale = Locale.current
 //            Text(locale.regionCode ?? "")

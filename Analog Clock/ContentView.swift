@@ -52,7 +52,7 @@ struct Home: View {
             .padding()
 
             Spacer(minLength: 0)
-
+            
             ZStack {
                 Circle() // Clock Background
                     .fill(Color("Color").opacity(0.1))
@@ -87,7 +87,7 @@ struct Home: View {
                     .fill(Color.primary)
                     .frame(width: 2, height: (screen.width - 240) / 2)
                     .offset(y: -(screen.width - 240) / 4)
-                    .rotationEffect(.init(degrees: Double(currentTime.hour) * 30))
+                    .rotationEffect(.init(degrees: Double(currentTime.hour + (currentTime.min / 60)) * 30))
 
                 // Center Dot
                 Circle()
@@ -96,6 +96,17 @@ struct Home: View {
             }
             .frame(width: screen.width - 80, height: screen.width - 80)
 
+            
+            // Getting Region Name
+            Text(Locale.current.localizedString(forRegionCode: Locale.current.regionCode!) ?? "")
+                .font(.largeTitle)
+                .fontWeight(.heavy)
+                .padding(.top, 35)
+            
+            Text(getTime())
+                .font(.system(size: 45))
+                .fontWeight(.heavy)
+                .padding(.top, 10)
             Spacer(minLength: 0)
         }
         .onAppear(perform: {
@@ -120,6 +131,11 @@ struct Home: View {
                 currentTime = Time(hour: hour, min: min, sec: sec)
             }
         }
+    }
+    func getTime() -> String {
+        let format = DateFormatter()
+        format.dateFormat = "hh:mm a"
+        return format.string(from: Date())
     }
 }
 

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var isDark = false
+    @State var isDark = true
 
     var body: some View {
         NavigationView {
@@ -50,6 +50,27 @@ struct Home: View {
             .padding()
 
             Spacer(minLength: 0)
+
+            ZStack {
+                Circle() // Clock Background
+                    .fill(Color("Color").opacity(0.1))
+
+                // Seconds Dots
+                // This formula (Foreach Section) taked from Kavasoft
+                ForEach(0 ..< 60, id: \.self) { i in
+                    Rectangle()
+                        .fill(Color.primary)
+                        // Height section -> Hours are long rectangle, Seconds are short rectangles
+                        .frame(width: 2, height: (i % 5) == 0 ? 15 : 5)
+                        .offset(y: (screen.width - 110) / 2)
+                        .rotationEffect(.init(degrees: Double(i) * 6))
+                }
+            }
+            .frame(width: screen.width - 80, height: screen.width - 80)
+
+            Spacer(minLength: 0)
         }
     }
 }
+
+let screen = UIScreen.main.bounds

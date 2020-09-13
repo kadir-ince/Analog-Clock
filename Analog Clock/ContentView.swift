@@ -65,6 +65,29 @@ struct Home: View {
                         .offset(y: (screen.width - 110) / 2)
                         .rotationEffect(.init(degrees: Double(i) * 6))
                 }
+
+                // Second Line
+                Rectangle()
+                    .fill(Color.primary)
+                    .frame(width: 2, height: (screen.width - 180) / 2)
+                    .offset(y: -(screen.width - 180) / 4)
+
+                // Minute Line
+                Rectangle()
+                    .fill(Color.primary)
+                    .frame(width: 2, height: (screen.width - 200) / 2)
+                    .offset(y: -(screen.width - 200) / 4)
+
+                // Hour Line
+                Rectangle()
+                    .fill(Color.primary)
+                    .frame(width: 2, height: (screen.width - 240) / 2)
+                    .offset(y: -(screen.width - 240) / 4)
+
+                // Center Dot
+                Circle()
+                    .fill(Color.primary)
+                    .frame(width: 15, height: 15)
             }
             .frame(width: screen.width - 80, height: screen.width - 80)
 

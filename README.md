@@ -2,7 +2,7 @@
  Analog Clock <br>
  Written with SwiftUI
 
-<img width=600  src="https://github.com/kadir-ince/Analog-Clock/blob/main/whatsLike.gif">
+<img width=500  src="https://github.com/kadir-ince/Analog-Clock/blob/main/whatsLike.gif">
 
 ## How Can I Open On My Mac?  🔨
 

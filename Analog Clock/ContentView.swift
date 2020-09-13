@@ -24,7 +24,7 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-struct Home: View {
+//struct Home: View {
     @Binding var isDark: Bool
     @State var currentTime = Time(hour: 0, min: 0, sec: 0)
     @State var receiver = Timer.publish(every: 1, on: .current, in: .default)
@@ -96,7 +96,7 @@ struct Home: View {
             }
             .frame(width: screen.width - 80, height: screen.width - 80)
 
-//            
+//
 //            // Getting Region Name
 //            let locale = Locale.current
 //            Text(locale.regionCode ?? "")

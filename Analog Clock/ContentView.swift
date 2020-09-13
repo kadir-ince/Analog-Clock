@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ContentView: View {
     @State var isDark = true
-
     var body: some View {
         NavigationView {
             Home(isDark: $isDark)
@@ -27,6 +26,9 @@ struct ContentView_Previews: PreviewProvider {
 
 struct Home: View {
     @Binding var isDark: Bool
+    @State var currentTime = Time(hour: 0, min: 0, sec: 0)
+    @State var receiver = Timer.publish(every: 1, on: .current, in: .default)
+        .autoconnect()
 
     var body: some View {
         VStack {
@@ -71,18 +73,21 @@ struct Home: View {
                     .fill(Color.primary)
                     .frame(width: 2, height: (screen.width - 180) / 2)
                     .offset(y: -(screen.width - 180) / 4)
+                    .rotationEffect(.init(degrees: Double(currentTime.sec) * 6))
 
                 // Minute Line
                 Rectangle()
                     .fill(Color.primary)
                     .frame(width: 2, height: (screen.width - 200) / 2)
                     .offset(y: -(screen.width - 200) / 4)
+                    .rotationEffect(.init(degrees: Double(currentTime.min) * 6))
 
                 // Hour Line
                 Rectangle()
                     .fill(Color.primary)
                     .frame(width: 2, height: (screen.width - 240) / 2)
                     .offset(y: -(screen.width - 240) / 4)
+                    .rotationEffect(.init(degrees: Double(currentTime.hour) * 30))
 
                 // Center Dot
                 Circle()
@@ -93,7 +98,35 @@ struct Home: View {
 
             Spacer(minLength: 0)
         }
+        .onAppear(perform: {
+            let calender = Calendar.current
+
+            let hour = calender.component(.hour, from: Date())
+            let min = calender.component(.minute, from: Date())
+            let sec = calender.component(.second, from: Date())
+
+            withAnimation(Animation.linear(duration: 0.01)) {
+                currentTime = Time(hour: hour, min: min, sec: sec)
+            }
+        })
+        .onReceive(receiver) { _ in
+            let calender = Calendar.current
+
+            let hour = calender.component(.hour, from: Date())
+            let min = calender.component(.minute, from: Date())
+            let sec = calender.component(.second, from: Date())
+
+            withAnimation(Animation.linear(duration: 0.01)) {
+                currentTime = Time(hour: hour, min: min, sec: sec)
+            }
+        }
     }
 }
 
 let screen = UIScreen.main.bounds
+
+struct Time {
+    var hour: Int
+    var min: Int
+    var sec: Int
+}
